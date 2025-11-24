@@ -100,7 +100,7 @@ v4 = Vector3D(1, 2, 3)
 v5 = Vector3D(4, 5, 6)
 print(f"{to_string(v4)} x {to_string(v5)} =", to_string(vector_m(v4, v5)))
 
-v6 = Vector3D(7, 8, 9)
+v6 = Vector3D(7, 8, -9)
 print(f"{to_string(v4)} * ({to_string(v5)} x {to_string(v6)}) =", mix_m(v4, v5, v6), "\n")
 
 #Добуток типів Matrix2. Операції: детермінант, обернена, добуток.
@@ -118,6 +118,9 @@ def inverse(m: Matrix2) -> Matrix2:
     match m:
         case Matrix2(a, b, c, d):
             de = det(m)
+            if (de == 0):
+                print("Визначник дорівнює нулю. Неможливо створити обернену матрицю.")
+                return m
             return Matrix2(d / de, -b / de, -c / de, a / de)
         
 def matrix_multiply(m1: Matrix2, m2: Matrix2) -> Matrix2:
@@ -127,7 +130,7 @@ def matrix_multiply(m1: Matrix2, m2: Matrix2) -> Matrix2:
         
 MathTypes: TypeAlias = Complex | Vector3D | Matrix2
         
-m1 = Matrix2(3, 5, 2, 7)
+m1 = Matrix2(1, 5, 2, 10)
 print(to_string(m1))
 print(f"det(A) =", det(m1))
 
